@@ -10,7 +10,7 @@ __pycache__/
 .env
 
 # Chroma persistent vector store
-../chromadb/
+chromadb/
 
 # VS Code settings
 .vscode/
