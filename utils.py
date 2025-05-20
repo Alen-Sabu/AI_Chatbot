@@ -10,7 +10,8 @@ def load_csv_as_documents(csvpath = csv_path):
     with open(csvpath, newline="", encoding="utf-8") as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
-            # Combin title, header, content into one string per document
-            combined_text = f"{row['post_title']}\n{row['post_header']}\n{row['post_content']}"
-            docs.append(Document(page_content=combined_text))
-        return docs
+            # Combine category, question, and answer into a single string
+            combined_text = f"Category: {row['category']}\nQuestion: {row['question']}\nAnswer: {row['answer']}"
+            docs.append(Document(page_content=combined_text, metadata={"category": row["category"]}))
+    
+    return docs

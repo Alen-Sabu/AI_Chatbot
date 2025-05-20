@@ -1,3 +1,16 @@
-id,post_title,post_header,post_content
-1,My First Post,Introduction,This is the content of my first post.
-2,Second Post,Overview,Here is some content for the second post.
+id,category,question,answer
+1,HR,What is the company's leave policy?,Employees are entitled to 20 days of paid leave per year, excluding public holidays.
+2,HR,How do I apply for sick leave?,Submit a leave request through the HR portal and attach a medical certificate.
+3,IT,How do I reset my email password?,Go to the internal tools portal and click "Forgot Password" under the Email section.
+4,IT,What tools do developers use?,Developers mainly use VS Code, GitHub, Docker, and internal CI/CD pipelines.
+5,Payroll,When is the salary credited?,Salary is credited on the last working day of each month.
+6,Payroll,Who to contact for salary discrepancies?,Email the payroll team at payroll@company.com with your employee ID.
+7,Finance,How do I claim reimbursement?,Fill out the reimbursement form and submit scanned receipts via the finance portal.
+8,Finance,What is the travel reimbursement policy?,Travel by air, train, or hotel stays are reimbursed if pre-approved by your manager.
+9,Operations,What is the office Wi-Fi password?,The Wi-Fi password is updated every month. Check the notice board or ask your IT admin.
+10,Security,What is the process for lost ID cards?,Report to the security desk immediately and fill out an ID re-issuance form.
+11,Onboarding,What documents are required for onboarding?,Bring a government ID, educational certificates, and a recent photograph.
+12,Onboarding,How long is the training period?,The training period is 4 weeks and includes technical and compliance modules.
+13,Projects,How are new projects assigned?,New projects are assigned based on skill match, availability, and project priority.
+14,Support,Where can I raise IT tickets?,Use the IT support portal or email support@company.com to raise tickets.
+15,Legal,Can I share internal data externally?,No, sharing internal data outside the organization violates the data security policy.

@@ -3,7 +3,7 @@ from langchain.chat_models import init_chat_model
 
 from langchain_core.messages import HumanMessage
 
-from langchain.embeddings import HuggingFaceBgeEmbeddings
+from langchain_huggingface import HuggingFaceEmbeddings
 import os
 
 from langchain_chroma import Chroma
@@ -12,7 +12,7 @@ from utils import load_csv_as_documents
 
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
-from langchain import hub
+
 from langchain_core.prompts import ChatPromptTemplate
 
 from langchain_core.documents import Document
@@ -22,6 +22,7 @@ from langgraph.graph import START, StateGraph
 
 from dotenv import load_dotenv
 
+import streamlit as st 
 
 # Load environment variables
 load_dotenv()
@@ -30,7 +31,7 @@ load_dotenv()
 model = init_chat_model("llama3-8b-8192", model_provider="groq")
 
 # Initializing the embedding model
-embedding_model = HuggingFaceBgeEmbeddings(
+embedding_model = HuggingFaceEmbeddings(
     model_name="sentence-transformers/all-MiniLM-L6-v2",  # You can change the model here
 )
 
@@ -69,10 +70,14 @@ class State(TypedDict):
 
 
 def retrieve(state: State):
-    retrieved_docs = vector_store.similarity_search(state["question"])
+    retrieved_docs = vector_store.similarity_search(state["question"], k = 1)
     return {"context": retrieved_docs}
 
 def generate(state: State):
+
+    if not state["context"]:
+        return {"answer": "Sorry, I couldn't find relevant information in the provided document."}
+
     docs_content = "\n\n".join(doc.page_content for doc in state["context"])
     messages = prompt.invoke({"question": state["question"], "context": docs_content})
     response = model.invoke(messages)
@@ -84,7 +89,29 @@ graph = (
     .add_edge(START, "retrieve")
     .compile()
 )
+st.title("RAG Chatbot")
 
-result = graph.invoke({"question": "What is Task Decomposition?"})
 
-print(f'Answer: {result["answer"]}')
+
+query = st.text_input("Ask your question:")
+if query:
+
+    result = graph.invoke({"question": query})
+    st.markdown("### Retrieved Context:")
+    for doc in result["context"]:
+        st.write(doc.page_content)
+
+    st.markdown("### Answer:")
+    docs_content = "\n\n".join(doc.page_content for doc in result["context"])
+    messages = prompt.invoke({"question": query, "context": docs_content})
+
+    # Stream the response
+    response_placeholder = st.empty()
+    streamed_text = ""
+
+    for chunk in model.stream(messages):
+        streamed_text += chunk.content
+        response_placeholder.markdown(streamed_text + "▌")
+
+    response_placeholder.markdown(streamed_text) 
+
