@@ -1,0 +1,35 @@
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+../botenv/
+
+# Environment variable files
+.env
+
+# Chroma persistent vector store
+../chromadb/
+
+# VS Code settings
+.vscode/
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+*.egg-info/
+dist/
+build/
+
+# Streamlit logs
+.streamlit/
+
+# Test and coverage caches
+.pytest_cache/
+.mypy_cache/
+.cache
+.coverage
+htmlcov/
