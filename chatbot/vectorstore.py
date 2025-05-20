@@ -1,7 +1,8 @@
-from langchain_chroma import Chroma
+
 from chatbot.embeddings import embedding_model
 from chatbot.utils import load_csv_as_documents
 from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain_core.vectorstores import InMemoryVectorStore
 
 def get_vector_store():
     """
@@ -13,11 +14,7 @@ def get_vector_store():
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200, add_start_index=True)
     all_splits = text_splitter.split_documents(documents)
 
-    vector_store = Chroma(
-        collection_name="example_collection",
-        embedding_function=embedding_model,
-        persist_directory="chroma_db",
-    )
+    vector_store = InMemoryVectorStore(embedding_function=embedding_model)
 
     vector_store.add_documents(documents=all_splits)
     return vector_store
