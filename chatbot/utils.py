@@ -5,6 +5,11 @@ from langchain.schema import Document
 csv_path = "c:/Users/Admin/OneDrive/Desktop/PROJECTS/internship_projects/ai_chatbot/ai_chatbot/data/data.csv"
 
 def load_csv_as_documents(csvpath = csv_path):
+    """
+    To convert structured CSV data into LangChain-compatible Document objects
+    for indexing in a vector database enabling semantic retrieval 
+    during chatbot interactions.
+    """
     docs = []
 
     with open(csvpath, newline="", encoding="utf-8") as csvfile:
