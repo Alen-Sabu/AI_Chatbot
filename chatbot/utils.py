@@ -2,7 +2,7 @@ import csv
 from langchain.schema import Document
 
 
-csv_path = "c:/Users/Admin/OneDrive/Desktop/PROJECTS/internship_projects/ai_chatbot/ai_chatbot/data/data.csv"
+csv_path = "data/data.csv"
 
 def load_csv_as_documents(csvpath = csv_path):
     """

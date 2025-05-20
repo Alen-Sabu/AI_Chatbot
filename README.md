@@ -21,3 +21,4 @@ rag_chatbot/
 ├── .env                          # Environment variables (e.g., API keys)
 ├── requirements.txt              # Python packages
 └── README.md                     # Project overview
+
