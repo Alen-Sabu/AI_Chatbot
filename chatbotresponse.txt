@@ -1,0 +1,17 @@
+Human: Tell me about yourself
+
+AI: I'm an AI designed to assist and communicate with humans. I was created to learn and improve over time, so I'm always learning and adapting to new situations. I don't have personal experiences or emotions like humans do, but I'm here to help answer your questions and provide information on a wide range of topics.
+
+Human: What is python 
+
+AI: Python is a high-level, interpreted programming language that is widely used for various purposes such as web development, scientific computing, data analysis, artificial intelligence, and more. It was created in the late 1980s by Guido van Rossum and was first released in 1991.
+
+Questions from my data.csv file
+Human: How do I apply for sick leave?
+
+AI: You can apply for sick leave by reaching out to your HR department or supervisor and providing them with a doctor's note or a formal letter stating the reason for your absence.
+
+Human: How do I claim reimbursement?
+
+AI: 
+To claim reimbursement, you will typically need to submit a receipt or invoice along with a completed claim form to your employer or the organization responsible for processing the reimbursement. The specific steps may vary depending on the organization's policies and procedures, so it's a good idea to check with your HR department or supervisor for guidance.

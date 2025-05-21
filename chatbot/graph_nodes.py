@@ -7,7 +7,7 @@ def query_or_respond(state: MessagesState):
     """
     This function decides whether the LLM needs 
     to call an external retrieval tool to fetch context
-    from the chroma db
+    from the memory
     """
     llm_with_tools = model.bind_tools([retrieve])
     response = llm_with_tools.invoke(state["messages"])
