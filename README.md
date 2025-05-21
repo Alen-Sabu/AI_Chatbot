@@ -1,28 +1,89 @@
-rag_chatbot/
-│
+# 🤖 AI Chatbot with LangChain & Streamlit
+
+This is an AI-powered chatbot built using LangChain, and Streamlit. It enables conversational interaction over a custom dataset with support for semantic search, streaming responses, and memory.
+
+## 🚀 Features
+
+* 🔍 Semantic search over CSV documents using ChromaDB
+* 💬 Conversational memory using LangGraph and state-based logic
+* 🔗 Tool integration via LangChain ToolNode
+* ⚡ Streamed AI responses
+* 🧠 In-memory or persistent vector storage
+* 📄 CSV document ingestion and text splitting
+* Showing previous chats
+
+## 📁 Project Structure
+
+```
+├── app.py                  # Entry point of the application
+|__ chatbot_ui.py           # Setting up the streamlit functions
 ├── chatbot/
 │   ├── __init__.py
-│   ├── llm.py                    # LLM model init (Groq)
-│   ├── embeddings.py             # Embedding model init
-│   ├── vectorstore.py            # Chroma DB setup
-│   ├── utils.py                  # CSV loader + converter to LangChain docs
-│   ├── retriever.py              # Retrieval tool definition
-│   ├── graph_nodes.py            # LangGraph nodes: query/respond, generate
-│   ├── graph_setup.py            # LangGraph builder and config
-│
-├── app.py                        # main program execution
-|__ chatbotui.py                  # Streamlit frontend logic
-│
-|
-│
-├── data/                         # Your raw CSV or dataset
-│   └── my_dataset.csv
-│
-├── .env                          # Environment variables (e.g., API keys)
-├── requirements.txt              # Python packages
-└── README.md                     # Project overview
+│   ├── embeddings.py       # Embedding model setup
+|   |── llm.py              # LLM model setup
+│   ├── utils.py            # Document loading, helpers
+│   |── graph_setup.py      # LangGraph pipeline definition
+|   |── graph_setup.py      # LangGraph  nodes setup
+|   |── retrieve.py         # Retreiving the data
+|   |── vectorestore.py     # Creating the vector store 
+├── chroma_db/              # Folder for persistent ChromaDB storage
+├── requirements.txt
+└── README.md
+```
 
+## 💠 Setup Instructions
 
+1. **Clone the repository**
+
+```bash
+git clone https://github.com/Alen-Sabu/AI_Chatbot.git
+cd AI_Chatbot
+```
+
+2. **Create virtual environment & install dependencies**
+
+```bash
+python -m venv venv
+source venv/bin/activate   # or venv\Scripts\activate on Windows
+pip install -r requirements.txt
+```
+
+3. **Run the app**
+
+```bash
+streamlit run app.py
+```
+
+4. **Prepare your data**
+
+Put your CSV file in the location expected by `load_csv_as_documents()` from `utils.py`.
+
+## 🧠 Technologies Used
+
+* [LangChain](https://github.com/langchain-ai/langchain)
+* [Streamlit](https://streamlit.io/)
+* [LangGraph](https://github.com/langchain-ai/langgraph)
+* [ Groq](https://platform.openai.com/) for LLM access
+
+## ⚙️ Config
+
+The chatbot is configured via a LangGraph state graph in `graph.py` with nodes:
+
+* `query_or_respond` – Entry point to decide if tools are needed
+* `tools` – Retrieval or external tool calls
+* `generate` – Response generation using LLMs
+
+## 📌 Notes
+
+* Vectorstore is persistent via ChromaDB or can be run in-memory
+* CSV documents are chunked using `RecursiveCharacterTextSplitter`
+* Can be extended with more tools or integrated into a backend
+
+## 📄 License
+
+This project is licensed under the MIT License. See the `LICENSE` file for details.
+
+## Project File Explanation
 # llm.py
 sets up and initializes the Large Language Model (LLM) 
 to be used across the chatbot pipeline using the LangChain abstraction.
@@ -73,15 +134,5 @@ build_graph() - It builds a graph  and It defines how your chatbot processes a m
 # app.py
  - takes graph, config from build_graph function and pass it on to run_chatbot function
  - calls the run_chatbot for streamlit ui
-
-
-How to run the project ?
- - Install dependencies
-    Ensure you have a virtual environment activated, then install requirements:
-    pip install -r requirements.txt
-
- - Create a .env file and mention your hugging face token and grog api key
-
- -  Run the chatbot with Streamlit using the command: streamlit run app.py
 
 
