@@ -29,20 +29,25 @@ def stream_response(graph, config):
 
     full_response = ""
     last_ai_content = None
+    st.session_state.messages.append(AIMessage(content=""))
     input_data = {"messages": st.session_state.messages}
 
-    for step in graph.stream(input_data, stream_mode = "values", config = config):
-        ai_msg = [m for m in step["messages"] if isinstance(m, AIMessage)]
-        if ai_msg:
-            current_content = ai_msg[-1].content
-            if current_content != last_ai_content:
-                full_response = current_content
-                response_placeholder.markdown(full_response)
-                last_ai_content = current_content
+    try:
+        for step in graph.stream(input_data, stream_mode = "values", config = config):
+            ai_msg = [m for m in step["messages"] if isinstance(m, AIMessage)]
+            if ai_msg:
+                current_content = ai_msg[-1].content
+                if current_content != last_ai_content:
+                    full_response = current_content
+                    response_placeholder.markdown(full_response)
+                    last_ai_content = current_content
     
-    ai_msg = AIMessage(content = full_response)
-    st.session_state.messages.append(ai_msg)
-    response_placeholder.markdown(full_response)
+    except Exception as e:
+        full_response = "I am sorry, I don't know to asnswer that"
+        response_placeholder.markdown(full_response)
+    
+    st.session_state.messages.append(AIMessage(content=full_response))
+    
 
 def run_chatbot(graph, config):
     st.set_page_config(page_title="RAG Chatbot", page_icon="🤖")

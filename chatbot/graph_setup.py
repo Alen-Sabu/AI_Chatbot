@@ -9,18 +9,18 @@ def build_graph():
     memory = MemorySaver()
     graph_builder = StateGraph(MessagesState)
 
-    graph_builder.add_node("query_or_respond", query_or_respond)
+    # Only include tool and generate nodes
     graph_builder.add_node("tools", tools)
     graph_builder.add_node("generate", generate)
 
-    graph_builder.set_entry_point("query_or_respond")
-    graph_builder.add_conditional_edges(
-        "query_or_respond",
-        tools_condition,
-        {END: END, "tools": "tools"},
-    )
+    # Set the entry point directly to tools
+    graph_builder.set_entry_point("tools")
+
+    # Define flow: tools → generate → END
     graph_builder.add_edge("tools", "generate")
     graph_builder.add_edge("generate", END)
 
     config = {"configurable": {"thread_id": "abc123"}}
     return graph_builder.compile(checkpointer=memory), config
+
+    

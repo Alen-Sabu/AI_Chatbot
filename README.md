@@ -65,6 +65,11 @@ Put your CSV file in the location expected by `load_csv_as_documents()` from `ut
 * [LangGraph](https://github.com/langchain-ai/langgraph)
 * [ Groq](https://platform.openai.com/) for LLM access
 
+
+## Other References and Technologies
+* ChatGPT
+* LangChain - reference for creating the rag: https://python.langchain.com/docs/tutorials/rag/
+
 ## ⚙️ Config
 
 The chatbot is configured via a LangGraph state graph in `graph.py` with nodes:
